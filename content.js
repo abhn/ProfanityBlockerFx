@@ -43,7 +43,9 @@ function traverse(elm) {
   }
 }
 
-browser.runtime.onMessage.addListener(({wordList}) => {  
-  notCoolWorldsRegex = new RegExp(wordList.join("|"), 'gi');
-  traverse(document.querySelector('body'));
+browser.runtime.onMessage.addListener(({wordList}) => {
+  if(wordList && wordList.length) {
+    notCoolWorldsRegex = new RegExp(wordList.join("|"), 'gi');
+    traverse(document.querySelector('body'));
+  }
 })
